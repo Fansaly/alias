@@ -60,9 +60,12 @@ function getAppsInfo() {
   local len=$1
   local apps=(${@:2})
 
-  local spaces_nv=5
+  # ✓ and prev space
+  local len_char=2
+  local spaces_nv=$((5 - $len_char))
   local spaces_vv=5
-  local len_name=$len
+
+  local len_name=$(($len + $len_char))
   local len_latest=18
   local len_current=18
 
