@@ -7,6 +7,7 @@ alias shadow="${ALIAS_DIR}/shadow-image/shadow.sh"
 
 source "${ALIAS_DIR}/upload-server/upload-server.sh"
 source "${ALIAS_DIR}/localip/alias.sh"
+source "${ALIAS_DIR}/proxy/proxy.sh"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias pbcopy="${ALIAS_DIR}/pasteboard/pbcopy.sh"
