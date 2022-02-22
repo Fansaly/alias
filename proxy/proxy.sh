@@ -24,13 +24,18 @@ function __set_proxy() {
   local server_host="$1"
   local server_port="$2"
   local silent="$3"
+  local force="$4"
 
-  proxy test --silent
-  if [[ $? -ne 0 ]]; then
-    if [[ -z "$silent" ]]; then
-      echo -e "\033[38;5;124mProxy server setup failed.\033[0m"
+  if [[ -z "$force" ]]; then
+    proxy test --silent
+
+    if [[ $? -ne 0 ]]; then
+      if [[ -z "$silent" ]]; then
+        echo -e "\033[38;5;124mProxy server setup failed.\033[0m"
+      fi
+
+      return 1
     fi
-    return 1
   fi
 
   export https_proxy="http://$server_host:$server_port"
@@ -81,6 +86,9 @@ function proxy() {
       ;;
     "set --silent" )
       __set_proxy "$server_host" "$server_port" "silent"
+      ;;
+    "set --force" )
+      __set_proxy "$server_host" "$server_port" "silent" "force"
       ;;
     "unset" )
       __unset_proxy
