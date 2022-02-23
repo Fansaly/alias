@@ -2,6 +2,10 @@
 
 ALIAS_DIR=$(cd "$(dirname "$0")" && pwd)
 
+if [[ ! -f "$ALIAS_DIR/alias.sh" ]]; then
+  ALIAS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+fi
+
 alias ass2lrc="${ALIAS_DIR}/ass2lrc/ass2lrc.sh"
 alias shadow="${ALIAS_DIR}/shadow-image/shadow.sh"
 
