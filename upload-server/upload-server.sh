@@ -5,13 +5,19 @@ function __print-msg() {
   local cname="$2"
   local token="$3"
   local ips=($(localip))
-  local ip=${ips[0]}
+  local ip
 
   echo
   echo -e "\033[38;5;128m$cname\033[0m running at:"
   echo
   echo -e " - Local:   \033[0;36mhttp://localhost:\033[1;96m${port}\033[0m"
-  echo -e " - Network: \033[0;36mhttp://${ip}:\033[1;96m${port}\033[0m"
+
+  if [[ ${#ips[@]} -gt 0 ]]; then
+    for ip in "${ips[@]}"; do
+      echo -e " - Network: \033[0;36mhttp://${ip}:\033[1;96m${port}\033[0m"
+    done
+  fi
+
   echo
   echo -e " token: \033[0;37m$token\033[0m"
   echo
