@@ -70,9 +70,25 @@ function __usage() {
   echo
 }
 
+function proxy_server() {
+  local server_port="7890"
+  local server_host="127.0.0.1"
+
+  if [[ "$OSTYPE" == "linux-gnu" && -n $(command -v wslsys) ]]; then
+    local vsersion=$(wslsys -V | sed -e 's/[ :a-zA-Z]\+\(.*\)/\1/')
+
+    if [[ $vsersion -eq 2 ]]; then
+      server_host=$(cat "/etc/resolv.conf" | grep nameserver | awk '{print $2}')
+    fi
+  fi
+
+  echo "$server_host:$server_port"
+}
+
 function proxy() {
-  server_host="127.0.0.1"
-  server_port="7890"
+  local server=$(proxy_server)
+  local server_host=$(echo "$server" | awk -F: '{print $1}')
+  local server_port=$(echo "$server" | awk -F: '{print $2}')
 
   case "$@" in
     "test" )
