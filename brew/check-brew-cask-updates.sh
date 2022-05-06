@@ -119,12 +119,13 @@ function getAppNameMaxLength() {
 
 
 apps=($(brew list --cask))
+code=$?
 
-if [[ ! $? -eq 0 ]]; then
-  exit $?
+if [[ ! $code -eq 0 ]]; then
+  return $code &>/dev/null || exit $code
 elif [[ ${#apps[@]} -eq 0 ]]; then
   echo "No application installed."
-  exit 0
+  return 0 &>/dev/null || exit 0
 else
   len=$(getAppNameMaxLength "${apps[@]}")
   getAppsInfo $len "${apps[@]}"
