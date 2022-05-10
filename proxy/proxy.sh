@@ -75,9 +75,9 @@ function proxy_server() {
   local server_host="127.0.0.1"
 
   if [[ "$OSTYPE" == "linux-gnu" && -n $(command -v wslsys) ]]; then
-    local vsersion=$(wslsys -V | sed -e 's/[ :a-zA-Z]\+\(.*\)/\1/')
+    local version=$(wslsys -V | sed -E 's/[ :a-zA-Z]+(.*)/\1/')
 
-    if [[ $vsersion -eq 2 ]]; then
+    if [[ "$version" =~ ^[0-9]$ && $version -eq 2 ]]; then
       server_host=$(cat "/etc/resolv.conf" | grep nameserver | awk '{print $2}')
     fi
   fi
