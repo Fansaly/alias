@@ -69,6 +69,12 @@ function getAppsInfo() {
   local len_latest=18
   local len_current=18
 
+  # `Application' length in title
+  local len_name_min=$((11 + 5 + $spaces_nv))
+  if [[ $len_name -lt $len_name_min ]]; then
+    len_name=$len_name_min
+  fi
+
   local pad_nv="$(padding $spaces_nv)"
   local pad_vv="$(padding $spaces_vv)"
   local format="%-${len_name}s${pad_nv}%-${len_latest}s${pad_vv}%-${len_current}s"
