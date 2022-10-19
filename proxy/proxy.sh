@@ -1,5 +1,9 @@
 #!/bin/bash
 
+_DIR_=$(cd "$(dirname "$0")" && pwd)
+
+source "${_DIR_}/ssid.sh"
+
 function __test_proxy() {
   local server_host="$1"
   local server_port="$2"
@@ -25,6 +29,15 @@ function __set_proxy() {
   local server_port="$2"
   local silent="$3"
   local force="$4"
+
+  local disabledSSID=$(disableProxy)
+  if [[ ! -z "$disabledSSID" ]]; then
+    if [[ -z "$force" ]]; then
+      echo -e "\033[38;5;208m\"${disabledSSID}\" \033[38;5;124mnot allowed to set proxy server.\033[0m"
+    fi
+
+    return 2
+  fi
 
   if [[ -z "$force" ]]; then
     proxy test --silent
