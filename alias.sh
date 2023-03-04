@@ -14,6 +14,7 @@ source "${ALIAS_DIR}/localip/alias.sh"
 source "${ALIAS_DIR}/proxy/proxy.sh"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias open="${ALIAS_DIR}/open/open.sh"
   alias pbcopy="${ALIAS_DIR}/pasteboard/pbcopy.sh"
   alias pbpaste="${ALIAS_DIR}/pasteboard/pbpaste.sh"
 fi
