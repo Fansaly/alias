@@ -99,7 +99,7 @@ function getAppsInfo() {
     latest=$( \
       echo "$info" | \
       sed -n 1p | \
-      sed -e 's/'"$app"':[[:space:]]//' -e 's/[[:space:]](.*)//' \
+      sed -e 's/.*'"$app"':[[:space:]]//' -e 's/[[:space:]](.*)//' \
     )
     current=$(echo "$info" | \
       sed -n 3p | \
