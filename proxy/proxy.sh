@@ -2,6 +2,10 @@
 
 _DIR_=$(cd "$(dirname "$0")" && pwd)
 
+if [[ ! -f "$_DIR_/ssid.sh" ]]; then
+  _DIR_=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+fi
+
 source "${_DIR_}/ssid.sh"
 
 function __test_proxy() {
